@@ -1,0 +1,17 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local dev artifacts
+.playwright-cli/
+*.log
+
+# Misc
+node_modules/
+dist/
