@@ -1,4 +1,4 @@
-# 
+# Civic Atlas / Freedom Compass
 A lightweight, static, civic-themed bilingual landing page with animated visuals.
 
 ---
@@ -7,7 +7,7 @@ A lightweight, static, civic-themed bilingual landing page with animated visuals
 
 ### 1) Project Overview
 
-`reedom.gov` is a front-end-only landing page focused on civic values such as liberty, rule of law, responsibility, and participation.  
+`Civic Atlas` (Freedom Compass) is a front-end-only landing page focused on civic values such as liberty, rule of law, responsibility, and participation.  
 It combines:
 
 - A **hero section** with civic messaging and call-to-action.
@@ -106,7 +106,7 @@ If you plan to publish or collaborate broadly, add a `LICENSE` file (e.g., MIT/A
 
 ### 1）项目简介
 
-`reedom.gov` 是一个纯前端静态落地页，围绕自由、法治、责任、参与等公民主题进行视觉与文案表达。  
+`Civic Atlas` (Freedom Compass) 是一个纯前端静态落地页，围绕自由、法治、责任、参与等公民主题进行视觉与文案表达。  
 项目包含：
 
 - **首屏 Hero 区域**（主题文案 + 行动按钮）
