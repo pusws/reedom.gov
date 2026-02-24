@@ -85,6 +85,124 @@ const streamMat = new THREE.MeshBasicMaterial({ color: '#f6d59b', transparent: t
 const stream = new THREE.Mesh(streamGeo, streamMat);
 root.add(stream);
 
+// “宪政脉冲带”：通过着色器制造随时间起伏的光带
+const pulseField = new THREE.Mesh(
+  new THREE.RingGeometry(3.2, 4.6, 160, 1),
+  new THREE.ShaderMaterial({
+    transparent: true,
+    side: THREE.DoubleSide,
+    uniforms: {
+      uTime: { value: 0 },
+    },
+    vertexShader: `
+      uniform float uTime;
+      varying vec2 vUv;
+
+      void main() {
+        vUv = uv;
+        vec3 displaced = position;
+        float wave = sin((uv.x * 14.0) + (uTime * 1.7)) * 0.08;
+        wave += cos((uv.x * 8.0) - (uTime * 1.3)) * 0.05;
+        displaced.z += wave;
+
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(displaced, 1.0);
+      }
+    `,
+    fragmentShader: `
+      varying vec2 vUv;
+
+      void main() {
+        float radial = smoothstep(0.0, 0.4, vUv.y) * (1.0 - smoothstep(0.62, 1.0, vUv.y));
+        float band = smoothstep(0.3, 0.5, abs(sin(vUv.x * 24.0)));
+        vec3 base = mix(vec3(0.45, 0.62, 1.0), vec3(0.96, 0.77, 0.49), band);
+        gl_FragColor = vec4(base, radial * 0.4);
+      }
+    `,
+  })
+);
+pulseField.rotation.x = Math.PI / 2.2;
+root.add(pulseField);
+
+// “公民卫星”：围绕核心轨道运转的多面体
+const satellites = [];
+for (let i = 0; i < 4; i += 1) {
+  const satellite = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(0.1 + i * 0.015, 1),
+    new THREE.MeshStandardMaterial({
+      color: i % 2 === 0 ? '#ffdca7' : '#9ab6ff',
+      emissive: i % 2 === 0 ? '#9e7745' : '#2a4f9e',
+      emissiveIntensity: 0.75,
+      roughness: 0.24,
+      metalness: 0.6,
+    })
+  );
+  root.add(satellite);
+
+  satellites.push({
+    mesh: satellite,
+    radius: 2.4 + i * 0.46,
+    speed: 0.35 + i * 0.09,
+    offset: i * (Math.PI / 2),
+    lift: -0.45 + i * 0.25,
+  });
+}
+
+// “共识火花”：从核心向外传播的粒子层
+const sparkCount = 1800;
+const sparkGeo = new THREE.BufferGeometry();
+const sparkPositions = new Float32Array(sparkCount * 3);
+const sparkShift = new Float32Array(sparkCount);
+
+for (let i = 0; i < sparkCount; i += 1) {
+  const i3 = i * 3;
+  const phi = Math.acos(1 - 2 * Math.random());
+  const theta = Math.PI * 2 * Math.random();
+  const radius = 2 + Math.random() * 2.4;
+
+  sparkPositions[i3] = Math.sin(phi) * Math.cos(theta) * radius;
+  sparkPositions[i3 + 1] = Math.cos(phi) * radius;
+  sparkPositions[i3 + 2] = Math.sin(phi) * Math.sin(theta) * radius;
+  sparkShift[i] = Math.random() * Math.PI * 2;
+}
+
+sparkGeo.setAttribute('position', new THREE.BufferAttribute(sparkPositions, 3));
+sparkGeo.setAttribute('aShift', new THREE.BufferAttribute(sparkShift, 1));
+
+const sparks = new THREE.Points(
+  sparkGeo,
+  new THREE.ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+    uniforms: {
+      uTime: { value: 0 },
+    },
+    vertexShader: `
+      attribute float aShift;
+      uniform float uTime;
+
+      void main() {
+        vec3 transformed = position;
+        float breath = 0.88 + sin(uTime * 1.4 + aShift) * 0.18;
+        transformed *= breath;
+
+        vec4 mvPosition = modelViewMatrix * vec4(transformed, 1.0);
+        gl_PointSize = (2.8 + sin(aShift + uTime * 2.0) * 1.2) * (300.0 / -mvPosition.z);
+        gl_Position = projectionMatrix * mvPosition;
+      }
+    `,
+    fragmentShader: `
+      void main() {
+        float d = distance(gl_PointCoord, vec2(0.5));
+        float alpha = smoothstep(0.5, 0.1, d);
+        vec3 color = mix(vec3(0.55, 0.7, 1.0), vec3(1.0, 0.86, 0.62), gl_PointCoord.y);
+        gl_FragColor = vec4(color, alpha * 0.7);
+      }
+    `,
+  })
+);
+root.add(sparks);
+
 // 背景星点
 const starsGeo = new THREE.BufferGeometry();
 const starCount = 2200;
@@ -136,6 +254,24 @@ function animate() {
 
   stream.rotation.y = t * 0.12;
   stream.material.opacity = 0.28 + Math.sin(t * 1.9) * 0.1;
+
+  pulseField.material.uniforms.uTime.value = t;
+  pulseField.rotation.z = t * 0.08;
+
+  satellites.forEach((satellite, i) => {
+    const angle = t * satellite.speed + satellite.offset;
+    satellite.mesh.position.set(
+      Math.cos(angle) * satellite.radius,
+      satellite.lift + Math.sin(t * 0.8 + i) * 0.25,
+      Math.sin(angle) * satellite.radius
+    );
+    satellite.mesh.rotation.x = t * 0.7;
+    satellite.mesh.rotation.y = -t * 0.5;
+  });
+
+  sparks.material.uniforms.uTime.value = t;
+  sparks.rotation.y = t * 0.09;
+  sparks.rotation.x = Math.sin(t * 0.35) * 0.2;
 
   root.rotation.y += (pointerX * 0.23 - root.rotation.y) * 0.03;
   root.rotation.x += (-pointerY * 0.12 - root.rotation.x) * 0.03;
