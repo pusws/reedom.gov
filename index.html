@@ -39,38 +39,75 @@
           <a href="#principles" class="cta" data-i18n="heroCta">Explore Core Principles</a>
         </div>
 
+        <!-- Hero Emblem: Liberty Torch + Shield + Orbit Rings -->
         <div class="orbits" aria-hidden="true">
-          <svg viewBox="0 0 560 560" class="glyph" role="img">
+          <svg viewBox="0 0 580 580" class="glyph" role="img">
             <defs>
-              <linearGradient id="ringGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+              <!-- Gradients -->
+              <linearGradient id="torchGold" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#fff6df" />
-                <stop offset="50%" stop-color="#f3cb87" />
+                <stop offset="45%" stop-color="#f3cb87" />
                 <stop offset="100%" stop-color="#be7830" />
               </linearGradient>
               <linearGradient id="shieldBlue" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stop-color="#91b3ff" />
                 <stop offset="100%" stop-color="#234797" />
               </linearGradient>
-              <radialGradient id="coreAura" cx="50%" cy="45%" r="55%">
-                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.75" />
-                <stop offset="55%" stop-color="#8fb1ff" stop-opacity="0.38" />
+              <linearGradient id="flameHot" x1="50%" y1="100%" x2="50%" y2="0%">
+                <stop offset="0%" stop-color="#ff8c00" />
+                <stop offset="40%" stop-color="#ffdd44" />
+                <stop offset="100%" stop-color="#fff8e0" stop-opacity="0" />
+              </linearGradient>
+              <linearGradient id="laurelLeft" x1="0%" y1="50%" x2="100%" y2="50%">
+                <stop offset="0%" stop-color="#4caf7a" />
+                <stop offset="100%" stop-color="#a8d8b0" />
+              </linearGradient>
+              <linearGradient id="laurelRight" x1="100%" y1="50%" x2="0%" y2="50%">
+                <stop offset="0%" stop-color="#4caf7a" />
+                <stop offset="100%" stop-color="#a8d8b0" />
+              </linearGradient>
+              <radialGradient id="coreAura" cx="50%" cy="48%" r="52%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.65" />
+                <stop offset="45%" stop-color="#8fb1ff" stop-opacity="0.28" />
                 <stop offset="100%" stop-color="#8fb1ff" stop-opacity="0" />
               </radialGradient>
-              <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="4" result="blur" />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
+              <radialGradient id="glowCenter" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ffe88a" stop-opacity="0.9" />
+                <stop offset="60%" stop-color="#ff9500" stop-opacity="0.35" />
+                <stop offset="100%" stop-color="#ff6600" stop-opacity="0" />
+              </radialGradient>
+              <radialGradient id="platformGrad" cx="50%" cy="0%" r="80%">
+                <stop offset="0%" stop-color="#7a9fff" stop-opacity="0.6" />
+                <stop offset="100%" stop-color="#1a2f6a" stop-opacity="0.2" />
+              </radialGradient>
+
+              <!-- Filters -->
+              <filter id="softGlow" x="-60%" y="-60%" width="220%" height="220%">
+                <feGaussianBlur stdDeviation="4.5" result="blur" />
+                <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+              </filter>
+              <filter id="warmGlow" x="-80%" y="-80%" width="260%" height="260%">
+                <feGaussianBlur stdDeviation="7" result="blur" />
+                <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+              </filter>
+              <filter id="shieldGlow" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="3" result="blur" />
+                <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+              </filter>
+              <filter id="starGlow" x="-100%" y="-100%" width="300%" height="300%">
+                <feGaussianBlur stdDeviation="2.5" result="blur" />
+                <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
               </filter>
             </defs>
 
-            <circle cx="280" cy="280" r="245" class="ring ring-a" />
-            <circle cx="280" cy="280" r="198" class="ring ring-b" />
-            <circle cx="280" cy="280" r="150" class="ring ring-c" />
+            <!-- ─── Outermost orbit ring (dashed, slow spin) ─── -->
+            <g class="orbit-outer">
+              <circle cx="290" cy="290" r="258" fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="1" stroke-dasharray="3 11" />
+            </g>
 
+            <!-- ─── Orbit text band ─── -->
             <g class="value-orbit">
-              <path id="valuePath" d="M280 80a200 200 0 1 1 0 400a200 200 0 1 1 0-400" />
+              <path id="valuePath" d="M290 52a238 238 0 1 1 0 476a238 238 0 1 1 0-476" />
               <text>
                 <textPath href="#valuePath" startOffset="4%" data-i18n="valueOrbit"
                   >Rule of Law · Responsibility · Participation ·</textPath
@@ -78,51 +115,245 @@
               </text>
             </g>
 
+            <!-- ─── Middle ring ─── -->
+            <circle cx="290" cy="290" r="210" fill="none" stroke="rgba(244,197,123,0.22)" stroke-width="1.5" stroke-dasharray="8 14" class="ring-mid" />
+
+            <!-- ─── Inner ring ─── -->
+            <circle cx="290" cy="290" r="168" fill="none" stroke="rgba(143,177,255,0.28)" stroke-width="1" stroke-dasharray="2 8" class="ring-inner" />
+
+            <!-- ─── Cardinal rays ─── -->
             <g class="rays">
-              <path d="M280 30v56" />
-              <path d="M280 474v56" />
-              <path d="M30 280h56" />
-              <path d="M474 280h56" />
-              <path d="M105 105l40 40" />
-              <path d="M415 415l40 40" />
-              <path d="M455 105l-40 40" />
-              <path d="M145 415l-40 40" />
+              <path d="M290 22v62" />
+              <path d="M290 496v62" />
+              <path d="M22 290h62" />
+              <path d="M496 290h62" />
+              <path d="M108 108l44 44" />
+              <path d="M428 428l44 44" />
+              <path d="M472 108l-44 44" />
+              <path d="M152 428l-44 44" />
             </g>
 
-            <circle cx="280" cy="280" r="132" fill="url(#coreAura)" />
+            <!-- ─── Diagonal accent ticks ─── -->
+            <g stroke="rgba(255,230,170,0.25)" stroke-width="1.2" stroke-linecap="round">
+              <line x1="290" y1="52" x2="290" y2="68" transform="rotate(22.5,290,290)" />
+              <line x1="290" y1="52" x2="290" y2="68" transform="rotate(45,290,290)" />
+              <line x1="290" y1="52" x2="290" y2="68" transform="rotate(67.5,290,290)" />
+              <line x1="290" y1="52" x2="290" y2="68" transform="rotate(112.5,290,290)" />
+              <line x1="290" y1="52" x2="290" y2="68" transform="rotate(135,290,290)" />
+              <line x1="290" y1="52" x2="290" y2="68" transform="rotate(157.5,290,290)" />
+              <line x1="290" y1="52" x2="290" y2="68" transform="rotate(202.5,290,290)" />
+              <line x1="290" y1="52" x2="290" y2="68" transform="rotate(225,290,290)" />
+              <line x1="290" y1="52" x2="290" y2="68" transform="rotate(247.5,290,290)" />
+              <line x1="290" y1="52" x2="290" y2="68" transform="rotate(292.5,290,290)" />
+              <line x1="290" y1="52" x2="290" y2="68" transform="rotate(315,290,290)" />
+              <line x1="290" y1="52" x2="290" y2="68" transform="rotate(337.5,290,290)" />
+            </g>
 
+            <!-- ─── Core aura glow ─── -->
+            <circle cx="290" cy="290" r="145" fill="url(#coreAura)" />
+
+            <!-- ─── Laurel wreath ─── -->
+            <g class="laurel" filter="url(#softGlow)">
+              <!-- Left side leaves -->
+              <ellipse cx="186" cy="290" rx="16" ry="9" fill="url(#laurelLeft)" opacity="0.82" transform="rotate(-10,186,290)" />
+              <ellipse cx="172" cy="272" rx="15" ry="8" fill="url(#laurelLeft)" opacity="0.78" transform="rotate(-25,172,272)" />
+              <ellipse cx="166" cy="252" rx="14" ry="7.5" fill="url(#laurelLeft)" opacity="0.74" transform="rotate(-40,166,252)" />
+              <ellipse cx="170" cy="232" rx="13" ry="7" fill="url(#laurelLeft)" opacity="0.70" transform="rotate(-55,170,232)" />
+              <ellipse cx="183" cy="216" rx="12" ry="6.5" fill="url(#laurelLeft)" opacity="0.65" transform="rotate(-68,183,216)" />
+              <ellipse cx="200" cy="204" rx="11" ry="6" fill="url(#laurelLeft)" opacity="0.58" transform="rotate(-80,200,204)" />
+              <ellipse cx="186" cy="308" rx="16" ry="9" fill="url(#laurelLeft)" opacity="0.78" transform="rotate(10,186,308)" />
+              <ellipse cx="174" cy="326" rx="15" ry="8" fill="url(#laurelLeft)" opacity="0.72" transform="rotate(25,174,326)" />
+              <ellipse cx="170" cy="348" rx="14" ry="7.5" fill="url(#laurelLeft)" opacity="0.66" transform="rotate(40,170,348)" />
+              <ellipse cx="182" cy="368" rx="13" ry="7" fill="url(#laurelLeft)" opacity="0.60" transform="rotate(55,182,368)" />
+              <!-- Right side leaves -->
+              <ellipse cx="394" cy="290" rx="16" ry="9" fill="url(#laurelRight)" opacity="0.82" transform="rotate(10,394,290)" />
+              <ellipse cx="408" cy="272" rx="15" ry="8" fill="url(#laurelRight)" opacity="0.78" transform="rotate(25,408,272)" />
+              <ellipse cx="414" cy="252" rx="14" ry="7.5" fill="url(#laurelRight)" opacity="0.74" transform="rotate(40,414,252)" />
+              <ellipse cx="410" cy="232" rx="13" ry="7" fill="url(#laurelRight)" opacity="0.70" transform="rotate(55,410,232)" />
+              <ellipse cx="397" cy="216" rx="12" ry="6.5" fill="url(#laurelRight)" opacity="0.65" transform="rotate(68,397,216)" />
+              <ellipse cx="380" cy="204" rx="11" ry="6" fill="url(#laurelRight)" opacity="0.58" transform="rotate(80,380,204)" />
+              <ellipse cx="394" cy="308" rx="16" ry="9" fill="url(#laurelRight)" opacity="0.78" transform="rotate(-10,394,308)" />
+              <ellipse cx="406" cy="326" rx="15" ry="8" fill="url(#laurelRight)" opacity="0.72" transform="rotate(-25,406,326)" />
+              <ellipse cx="410" cy="348" rx="14" ry="7.5" fill="url(#laurelRight)" opacity="0.66" transform="rotate(-40,410,348)" />
+              <ellipse cx="398" cy="368" rx="13" ry="7" fill="url(#laurelRight)" opacity="0.60" transform="rotate(-55,398,368)" />
+              <!-- Laurel stems -->
+              <path d="M186,290 Q210,288 232,286" stroke="#3a9e62" stroke-width="1.5" fill="none" opacity="0.5" />
+              <path d="M394,290 Q370,288 348,286" stroke="#3a9e62" stroke-width="1.5" fill="none" opacity="0.5" />
+            </g>
+
+            <!-- ─── Shield body ─── -->
             <path
-              d="M280 122l130 75v150c0 84-64 151-130 188-66-37-130-104-130-188V197z"
-              class="shield"
+              d="M290 142l118 68v138c0 78-56 140-118 172-62-32-118-94-118-172V210z"
               fill="url(#shieldBlue)"
+              class="shield"
+              filter="url(#shieldGlow)"
             />
-
+            <!-- Shield inner bevel -->
             <path
-              d="M280 162l92 53v109c0 57-41 102-92 133-51-31-92-76-92-133V215z"
+              d="M290 168l88 51v103c0 56-38 103-88 130-50-27-88-74-88-130V219z"
               fill="none"
-              stroke="url(#ringGlow)"
-              stroke-width="3.2"
-              filter="url(#softGlow)"
+              stroke="url(#torchGold)"
+              stroke-width="2.2"
+              opacity="0.65"
             />
-
+            <!-- Shield center cross bar -->
+            <line x1="220" y1="286" x2="360" y2="286" stroke="rgba(200,220,255,0.28)" stroke-width="1.2" />
+            <!-- Shield checkmark -->
             <path
-              d="M245 278l24 24 49-50"
+              d="M256 285l26 26 54-56"
               fill="none"
               stroke="#ffe9bc"
-              stroke-width="8.5"
+              stroke-width="9"
               stroke-linecap="round"
               stroke-linejoin="round"
               filter="url(#softGlow)"
             />
 
-            <circle cx="280" cy="280" r="20" class="core-dot" />
+            <!-- ─── Torch handle ─── -->
+            <rect x="281" y="382" width="18" height="64" rx="4" fill="url(#torchGold)" opacity="0.9" />
+            <rect x="276" y="442" width="28" height="8" rx="3" fill="url(#torchGold)" opacity="0.85" />
+
+            <!-- Torch cup / bowl -->
+            <path
+              d="M265 380 Q270 368 290 366 Q310 368 315 380 L318 390 Q290 396 262 390 Z"
+              fill="url(#torchGold)"
+              opacity="0.9"
+              filter="url(#softGlow)"
+            />
+
+            <!-- ─── Flame layers ─── -->
+            <g class="flame-group" filter="url(#warmGlow)">
+              <!-- Outer flame -->
+              <path
+                d="M290 364 C275 340 256 315 268 290 C278 268 290 278 290 260
+                   C290 278 302 268 312 290 C324 315 305 340 290 364Z"
+                fill="url(#flameHot)"
+                opacity="0.72"
+                class="flame-outer"
+              />
+              <!-- Mid flame -->
+              <path
+                d="M290 355 C280 336 268 315 278 296 C285 280 290 290 290 275
+                   C290 290 295 280 302 296 C312 315 300 336 290 355Z"
+                fill="#ffdd44"
+                opacity="0.82"
+                class="flame-mid"
+              />
+              <!-- Inner flame core -->
+              <path
+                d="M290 344 C285 330 279 315 285 302 C288 294 290 300 290 292
+                   C290 300 292 294 295 302 C301 315 295 330 290 344Z"
+                fill="white"
+                opacity="0.88"
+                class="flame-inner"
+              />
+            </g>
+
+            <!-- Flame glow halo -->
+            <circle cx="290" cy="312" r="34" fill="url(#glowCenter)" class="flame-halo" />
+
+            <!-- ─── Orbital dots on the middle ring ─── -->
+            <g class="orbital-dots">
+              <circle cx="290" cy="80" r="5.5" fill="#f4c57b" filter="url(#starGlow)" />
+              <circle cx="290" cy="80" r="5.5" fill="#f4c57b" filter="url(#starGlow)" transform="rotate(120,290,290)" />
+              <circle cx="290" cy="80" r="5.5" fill="#8ab4ff" filter="url(#starGlow)" transform="rotate(240,290,290)" />
+            </g>
+
+            <!-- ─── Star accents ─── -->
+            <g class="star-accents" filter="url(#starGlow)">
+              <!-- 5-point star top -->
+              <polygon points="290,62 294,74 306,74 297,81 300,93 290,86 280,93 283,81 274,74 286,74"
+                fill="#ffe9bc" opacity="0.88" />
+              <!-- Small stars on shield quadrants -->
+              <polygon points="248,230 250,236 256,236 251,240 253,246 248,242 243,246 245,240 240,236 246,236"
+                fill="#c8d8ff" opacity="0.7" />
+              <polygon points="332,230 334,236 340,236 335,240 337,246 332,242 327,246 329,240 324,236 330,236"
+                fill="#c8d8ff" opacity="0.7" />
+            </g>
+
+            <!-- ─── Orbiting nodes ─── -->
+            <g class="orbit-nodes">
+              <circle cx="290" cy="80" r="3.5" fill="#f4c57b" transform="rotate(60,290,290)" />
+              <circle cx="290" cy="80" r="3.5" fill="#a8ffd8" transform="rotate(165,290,290)" />
+              <circle cx="290" cy="80" r="3.5" fill="#8ab4ff" transform="rotate(285,290,290)" />
+            </g>
+
+            <!-- ─── Bottom civic pillars motif ─── -->
+            <g class="pillars-motif" opacity="0.5">
+              <rect x="252" y="456" width="10" height="36" rx="2" fill="url(#torchGold)" />
+              <rect x="270" y="462" width="10" height="30" rx="2" fill="#8ab4ff" />
+              <rect x="288" y="459" width="10" height="33" rx="2" fill="#a8ffd8" />
+              <rect x="306" y="454" width="10" height="38" rx="2" fill="url(#torchGold)" />
+              <rect x="324" y="461" width="10" height="31" rx="2" fill="#8ab4ff" />
+              <!-- base line -->
+              <rect x="244" y="492" width="98" height="3" rx="1.5" fill="rgba(255,220,160,0.5)" />
+            </g>
+
+            <!-- ─── Core pulse dot ─── -->
+            <circle cx="290" cy="290" r="10" class="core-dot" />
           </svg>
         </div>
       </div>
     </header>
 
+    <!-- Decorative divider -->
+    <div class="section-divider" aria-hidden="true">
+      <svg viewBox="0 0 1200 32" preserveAspectRatio="none" class="divider-svg">
+        <defs>
+          <linearGradient id="divLine" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="transparent" />
+            <stop offset="20%" stop-color="rgba(244,197,123,0.5)" />
+            <stop offset="50%" stop-color="rgba(244,197,123,0.85)" />
+            <stop offset="80%" stop-color="rgba(138,180,255,0.5)" />
+            <stop offset="100%" stop-color="transparent" />
+          </linearGradient>
+        </defs>
+        <path d="M0 16 Q150 6 300 16 Q450 26 600 16 Q750 6 900 16 Q1050 26 1200 16"
+          stroke="url(#divLine)" stroke-width="1.5" fill="none" />
+        <circle cx="600" cy="16" r="4" fill="rgba(244,197,123,0.7)" />
+        <circle cx="300" cy="16" r="2.5" fill="rgba(138,180,255,0.5)" />
+        <circle cx="900" cy="16" r="2.5" fill="rgba(168,255,216,0.5)" />
+        <!-- decorative diamonds -->
+        <polygon points="600,10 604,16 600,22 596,16" fill="rgba(244,197,123,0.6)" />
+        <polygon points="300,12 303,16 300,20 297,16" fill="rgba(138,180,255,0.4)" />
+        <polygon points="900,12 903,16 900,20 897,16" fill="rgba(168,255,216,0.4)" />
+      </svg>
+    </div>
+
     <main>
+      <!-- Panel 1: Rule of Law -->
       <section class="panel" id="principles">
+        <div class="panel-icon" aria-hidden="true">
+          <svg viewBox="0 0 80 80" class="panel-svg">
+            <defs>
+              <linearGradient id="scaleGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffe29a" />
+                <stop offset="100%" stop-color="#c87e20" />
+              </linearGradient>
+              <filter id="glow1" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur stdDeviation="2" result="b" />
+                <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+              </filter>
+            </defs>
+            <!-- Balance beam -->
+            <line x1="15" y1="38" x2="65" y2="38" stroke="url(#scaleGold)" stroke-width="2.5" stroke-linecap="round" filter="url(#glow1)" />
+            <!-- Center pivot -->
+            <circle cx="40" cy="38" r="3.5" fill="url(#scaleGold)" filter="url(#glow1)" />
+            <line x1="40" y1="38" x2="40" y2="62" stroke="url(#scaleGold)" stroke-width="2" stroke-linecap="round" />
+            <rect x="32" y="62" width="16" height="3.5" rx="1.5" fill="url(#scaleGold)" />
+            <!-- Left pan chains -->
+            <line x1="18" y1="38" x2="14" y2="50" stroke="url(#scaleGold)" stroke-width="1.4" opacity="0.85" />
+            <line x1="22" y1="38" x2="26" y2="50" stroke="url(#scaleGold)" stroke-width="1.4" opacity="0.85" />
+            <ellipse cx="20" cy="52" rx="9" ry="3" fill="none" stroke="url(#scaleGold)" stroke-width="1.8" filter="url(#glow1)" />
+            <!-- Right pan chains -->
+            <line x1="58" y1="38" x2="54" y2="50" stroke="url(#scaleGold)" stroke-width="1.4" opacity="0.85" />
+            <line x1="62" y1="38" x2="66" y2="50" stroke="url(#scaleGold)" stroke-width="1.4" opacity="0.85" />
+            <ellipse cx="60" cy="52" rx="9" ry="3" fill="none" stroke="url(#scaleGold)" stroke-width="1.8" filter="url(#glow1)" />
+            <!-- Top ornament -->
+            <polygon points="40,14 43,22 51,22 45,27 47,35 40,30 33,35 35,27 29,22 37,22"
+              fill="url(#scaleGold)" filter="url(#glow1)" opacity="0.9" />
+          </svg>
+        </div>
         <h2 data-i18n="panel1Title">01 · Freedom Needs Rule of Law</h2>
         <p data-i18n="panel1Body">
           Freedom is not boundaryless impulse, but equal protection and fair treatment for everyone within a legal
@@ -130,7 +361,46 @@
         </p>
       </section>
 
+      <!-- Panel 2: Rights & Responsibility -->
       <section class="panel">
+        <div class="panel-icon" aria-hidden="true">
+          <svg viewBox="0 0 80 80" class="panel-svg">
+            <defs>
+              <linearGradient id="handBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#a8caff" />
+                <stop offset="100%" stop-color="#2a5fd4" />
+              </linearGradient>
+              <filter id="glow2" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur stdDeviation="2" result="b" />
+                <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+              </filter>
+            </defs>
+            <!-- Handshake left palm -->
+            <path d="M8 44 C8 44 14 40 20 40 L30 40 C32 40 34 38 36 38 L44 38 C46 38 47 39 47 41 L47 43 C47 45 46 46 44 46 L38 46"
+              fill="none" stroke="url(#handBlue)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow2)" />
+            <path d="M30 40 L30 32 C30 30 32 28 34 28 C36 28 38 30 38 32 L38 38"
+              fill="none" stroke="url(#handBlue)" stroke-width="2.2" stroke-linecap="round" filter="url(#glow2)" />
+            <path d="M34 28 L34 22 C34 20 36 18 38 18 C40 18 42 20 42 22 L42 38"
+              fill="none" stroke="url(#handBlue)" stroke-width="2.2" stroke-linecap="round" filter="url(#glow2)" />
+            <path d="M38 20 L38 20 C38 18 40 16 42 16 C44 16 46 18 46 20 L46 38"
+              fill="none" stroke="url(#handBlue)" stroke-width="2.2" stroke-linecap="round" filter="url(#glow2)" />
+            <!-- Handshake right mirror -->
+            <path d="M72 44 C72 44 66 40 60 40 L50 40 C48 40 46 38 44 38"
+              fill="none" stroke="url(#handBlue)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow2)" />
+            <path d="M50 40 L50 32 C50 30 48 28 46 28 C44 28 42 30 42 32 L42 38"
+              fill="none" stroke="url(#handBlue)" stroke-width="2.2" stroke-linecap="round" filter="url(#glow2)" />
+            <!-- Clasped center sparkle -->
+            <circle cx="40" cy="41" r="3.5" fill="rgba(168,202,255,0.4)" stroke="url(#handBlue)" stroke-width="1.5" filter="url(#glow2)" />
+            <polygon points="40,33 41.5,37 46,37 42.5,39.5 44,44 40,41.5 36,44 37.5,39.5 34,37 38.5,37"
+              fill="url(#handBlue)" opacity="0.7" filter="url(#glow2)" transform="scale(0.6) translate(27,22)" />
+            <!-- Arc above = rights -->
+            <path d="M22 28 Q40 14 58 28" fill="none" stroke="url(#handBlue)" stroke-width="1.5" stroke-dasharray="3 4" opacity="0.6" />
+            <!-- Base = responsibility -->
+            <path d="M16 56 Q40 64 64 56" fill="none" stroke="url(#handBlue)" stroke-width="1.5" opacity="0.5" />
+            <line x1="40" y1="60" x2="40" y2="70" stroke="url(#handBlue)" stroke-width="1.5" opacity="0.5" />
+            <circle cx="40" cy="70" r="2" fill="url(#handBlue)" opacity="0.6" />
+          </svg>
+        </div>
         <h2 data-i18n="panel2Title">02 · Rights Grow with Responsibility</h2>
         <p data-i18n="panel2Body">
           Civic rights matter most when exercised actively and rationally: joining public dialogue, respecting facts,
@@ -138,7 +408,43 @@
         </p>
       </section>
 
+      <!-- Panel 3: Participation -->
       <section class="panel" id="civic-action">
+        <div class="panel-icon" aria-hidden="true">
+          <svg viewBox="0 0 80 80" class="panel-svg">
+            <defs>
+              <linearGradient id="leafGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#a8ffda" />
+                <stop offset="100%" stop-color="#1a9e6a" />
+              </linearGradient>
+              <filter id="glow3" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur stdDeviation="2" result="b" />
+                <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+              </filter>
+            </defs>
+            <!-- People figures (3) -->
+            <!-- Left person -->
+            <circle cx="18" cy="26" r="6" fill="url(#leafGreen)" opacity="0.8" filter="url(#glow3)" />
+            <path d="M10 54 C10 42 12 38 18 38 C24 38 26 42 26 54" fill="none" stroke="url(#leafGreen)" stroke-width="2.5" stroke-linecap="round" />
+            <!-- Center person (larger / leader) -->
+            <circle cx="40" cy="22" r="8" fill="url(#leafGreen)" filter="url(#glow3)" />
+            <path d="M28 58 C28 44 31 40 40 40 C49 40 52 44 52 58" fill="none" stroke="url(#leafGreen)" stroke-width="2.8" stroke-linecap="round" />
+            <!-- Right person -->
+            <circle cx="62" cy="26" r="6" fill="url(#leafGreen)" opacity="0.8" filter="url(#glow3)" />
+            <path d="M54 54 C54 42 56 38 62 38 C68 38 70 42 70 54" fill="none" stroke="url(#leafGreen)" stroke-width="2.5" stroke-linecap="round" />
+            <!-- Connection lines / civic bonds -->
+            <path d="M24 36 Q32 30 40 32 Q48 30 56 36" fill="none" stroke="url(#leafGreen)" stroke-width="1.4" stroke-dasharray="3 3" opacity="0.65" filter="url(#glow3)" />
+            <!-- Rising star / vote icon -->
+            <polygon points="40,8 41.8,13.5 47.5,13.5 43,16.8 44.8,22.3 40,19 35.2,22.3 37,16.8 32.5,13.5 38.2,13.5"
+              fill="url(#leafGreen)" opacity="0.6" transform="translate(0,0) scale(0.7) translate(17,-2)" />
+            <!-- Ground bar -->
+            <rect x="10" y="66" width="60" height="3" rx="1.5" fill="url(#leafGreen)" opacity="0.4" />
+            <!-- Upward arrows = participation -->
+            <path d="M27 66 L27 60 M24 63 L27 60 L30 63" fill="none" stroke="url(#leafGreen)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.7" />
+            <path d="M40 66 L40 58 M37 62 L40 58 L43 62" fill="none" stroke="url(#leafGreen)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.8" />
+            <path d="M53 66 L53 60 M50 63 L53 60 L56 63" fill="none" stroke="url(#leafGreen)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.7" />
+          </svg>
+        </div>
         <h2 data-i18n="panel3Title">03 · Participation Shapes the Future</h2>
         <p data-i18n="panel3Body">
           Public life is not a spectator seat. Every vote, every community action, and every insistence on transparent
@@ -146,6 +452,31 @@
         </p>
       </section>
     </main>
+
+    <!-- Bottom civic emblem divider -->
+    <div class="footer-emblem" aria-hidden="true">
+      <svg viewBox="0 0 320 48" class="footer-emblem-svg">
+        <defs>
+          <linearGradient id="footerLine" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="transparent" />
+            <stop offset="30%" stop-color="rgba(244,197,123,0.4)" />
+            <stop offset="70%" stop-color="rgba(138,180,255,0.4)" />
+            <stop offset="100%" stop-color="transparent" />
+          </linearGradient>
+        </defs>
+        <line x1="0" y1="24" x2="130" y2="24" stroke="url(#footerLine)" stroke-width="1" />
+        <line x1="190" y1="24" x2="320" y2="24" stroke="url(#footerLine)" stroke-width="1" />
+        <!-- Shield mini -->
+        <path d="M160 8 l14 8 v16 c0 9-6 16-14 20 -8-4-14-11-14-20 V16z"
+          fill="none" stroke="rgba(244,197,123,0.5)" stroke-width="1.2" />
+        <path d="M153 24 l5 5 10-11" fill="none" stroke="rgba(244,197,123,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <!-- Flanking dots -->
+        <circle cx="136" cy="24" r="2.5" fill="rgba(244,197,123,0.4)" />
+        <circle cx="184" cy="24" r="2.5" fill="rgba(138,180,255,0.4)" />
+        <circle cx="118" cy="24" r="1.5" fill="rgba(244,197,123,0.25)" />
+        <circle cx="202" cy="24" r="1.5" fill="rgba(138,180,255,0.25)" />
+      </svg>
+    </div>
 
     <footer>
       <p data-i18n="footer">Freedom · Responsibility · Participation · Shared Future</p>
