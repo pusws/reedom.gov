@@ -85,6 +85,59 @@ const streamMat = new THREE.MeshBasicMaterial({ color: '#f6d59b', transparent: t
 const stream = new THREE.Mesh(streamGeo, streamMat);
 root.add(stream);
 
+const civicBeacon = new THREE.Mesh(
+  new THREE.ConeGeometry(0.46, 6.8, 38, 1, true),
+  new THREE.MeshBasicMaterial({
+    color: '#ffe2af',
+    transparent: true,
+    opacity: 0.2,
+    blending: THREE.AdditiveBlending,
+    side: THREE.DoubleSide,
+    depthWrite: false,
+  })
+);
+civicBeacon.position.y = 3.1;
+civicBeacon.rotation.x = Math.PI;
+root.add(civicBeacon);
+
+const beaconCore = new THREE.Mesh(
+  new THREE.CylinderGeometry(0.06, 0.16, 4.5, 24, 1, true),
+  new THREE.MeshBasicMaterial({
+    color: '#9fc2ff',
+    transparent: true,
+    opacity: 0.36,
+    blending: THREE.AdditiveBlending,
+    side: THREE.DoubleSide,
+    depthWrite: false,
+  })
+);
+beaconCore.position.y = 1.8;
+root.add(beaconCore);
+
+const civicPulseGroup = new THREE.Group();
+root.add(civicPulseGroup);
+const civicPulses = [];
+const pulseGeo = new THREE.RingGeometry(1.95, 2.12, 96, 1);
+for (let i = 0; i < 5; i += 1) {
+  const pulse = new THREE.Mesh(
+    pulseGeo,
+    new THREE.MeshBasicMaterial({
+      color: i % 2 === 0 ? '#ffd9a0' : '#8db0ff',
+      transparent: true,
+      opacity: 0,
+      blending: THREE.AdditiveBlending,
+      side: THREE.DoubleSide,
+      depthWrite: false,
+    })
+  );
+  pulse.rotation.x = Math.PI / 2;
+  pulse.visible = false;
+  civicPulseGroup.add(pulse);
+  civicPulses.push({ mesh: pulse, birth: -99 });
+}
+let pulseCursor = 0;
+let lastPulseTime = 0;
+
 // “宪政脉冲带”：通过着色器制造随时间起伏的光带
 const pulseField = new THREE.Mesh(
   new THREE.RingGeometry(3.2, 4.6, 160, 1),
@@ -255,6 +308,33 @@ function animate() {
   stream.rotation.y = t * 0.12;
   stream.material.opacity = 0.28 + Math.sin(t * 1.9) * 0.1;
 
+  civicBeacon.material.opacity = 0.12 + Math.sin(t * 1.2) * 0.08;
+  civicBeacon.scale.setScalar(1 + Math.sin(t * 1.6) * 0.05);
+  beaconCore.material.opacity = 0.24 + Math.sin(t * 2.6) * 0.12;
+
+  if (t - lastPulseTime > 1.12) {
+    const pulse = civicPulses[pulseCursor % civicPulses.length];
+    pulseCursor += 1;
+    pulse.birth = t;
+    pulse.mesh.visible = true;
+    pulse.mesh.scale.setScalar(1);
+    pulse.mesh.position.y = -0.55;
+    lastPulseTime = t;
+  }
+
+  civicPulses.forEach((pulse, i) => {
+    if (!pulse.mesh.visible) return;
+    const age = t - pulse.birth;
+    if (age > 2.4) {
+      pulse.mesh.visible = false;
+      return;
+    }
+    const spread = 1 + age * 1.18;
+    pulse.mesh.scale.setScalar(spread);
+    pulse.mesh.position.y = -0.55 + age * 0.32;
+    pulse.mesh.material.opacity = (1 - age / 2.4) * (0.34 - i * 0.03);
+  });
+
   pulseField.material.uniforms.uTime.value = t;
   pulseField.rotation.z = t * 0.08;
 
@@ -278,6 +358,8 @@ function animate() {
 
   stars.rotation.y = t * 0.015;
   stars.rotation.x = Math.sin(t * 0.1) * 0.06;
+
+  camera.position.z = 10 + Math.sin(t * 0.22) * 0.18;
 
   renderer.render(scene, camera);
   requestAnimationFrame(animate);

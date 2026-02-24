@@ -119,6 +119,7 @@ h1 {
 .glyph {
   width: min(82vw, 450px);
   filter: drop-shadow(0 0 24px rgba(105, 155, 255, 0.24));
+  animation: glyphBreath 7s ease-in-out infinite;
 }
 
 .ring {
@@ -203,4 +204,41 @@ footer {
 .glyph .shield {
   stroke: rgba(215, 232, 255, 0.46);
   stroke-width: 1;
+}
+
+.value-orbit path {
+  fill: none;
+  stroke: rgba(255, 231, 179, 0.22);
+  stroke-width: 1;
+  stroke-dasharray: 5 10;
+}
+
+.value-orbit text {
+  fill: rgba(255, 224, 171, 0.85);
+  font-size: 16px;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  animation: spinValue 22s linear infinite;
+  transform-origin: 280px 280px;
+}
+
+@keyframes glyphBreath {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 24px rgba(105, 155, 255, 0.24));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 34px rgba(243, 188, 100, 0.35));
+    transform: scale(1.03);
+  }
+}
+
+@keyframes spinValue {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
