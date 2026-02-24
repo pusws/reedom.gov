@@ -1,5 +1,4 @@
-# reedom.gov
-
+# 
 A lightweight, static, civic-themed bilingual landing page with animated visuals.
 
 ---
