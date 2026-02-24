@@ -1,10 +1,13 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Civic Atlas · Freedom Compass</title>
-    <meta name="description" content="以自由主题为灵感：自由、法治、公民责任与共同体未来。" />
+    <meta
+      name="description"
+      content="Inspired by freedom themes: liberty, rule of law, civic responsibility, and our shared future."
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,19 +21,22 @@
 
     <header class="hero">
       <nav class="top-nav">
-        <span class="brand">Civic Atlas</span>
-        <a href="#civic-action" class="mini-link">Public Action</a>
+        <span class="brand" data-i18n="brand">Civic Atlas</span>
+        <div class="nav-actions">
+          <a href="#civic-action" class="mini-link" data-i18n="navAction">Public Action</a>
+          <button class="lang-toggle" type="button" id="lang-toggle" aria-label="切换到中文">中文</button>
+        </div>
       </nav>
 
       <div class="hero-grid">
         <div class="hero-content">
-          <p class="eyebrow">Inspired by freedom theme</p>
-          <h1>自由的意义，<br />在制度与公民之间被共同守护。</h1>
-          <p class="subtitle">
-            真正可持续的自由，不只属于个体表达，也来自法治边界、公开透明与社会参与。
-            我们既是权利的拥有者，也是共同体未来的塑造者。
+          <p class="eyebrow" data-i18n="eyebrow">Inspired by freedom theme</p>
+          <h1 data-i18n="heroTitle">Freedom endures when institutions and citizens safeguard it together.</h1>
+          <p class="subtitle" data-i18n="heroSubtitle">
+            Sustainable liberty belongs not only to personal expression, but also to rule-of-law boundaries,
+            transparency, and civic participation. We are both rights-holders and builders of our shared future.
           </p>
-          <a href="#principles" class="cta">探索核心原则</a>
+          <a href="#principles" class="cta" data-i18n="heroCta">Explore Core Principles</a>
         </div>
 
         <div class="orbits" aria-hidden="true">
@@ -66,7 +72,9 @@
             <g class="value-orbit">
               <path id="valuePath" d="M280 80a200 200 0 1 1 0 400a200 200 0 1 1 0-400" />
               <text>
-                <textPath href="#valuePath" startOffset="4%">法治 · Rule of Law · 责任 · Responsibility · 参与 · Participation ·</textPath>
+                <textPath href="#valuePath" startOffset="4%" data-i18n="valueOrbit"
+                  >Rule of Law · Responsibility · Participation ·</textPath
+                >
               </text>
             </g>
 
@@ -115,32 +123,32 @@
 
     <main>
       <section class="panel" id="principles">
-        <h2>01 · Freedom Needs Rule of Law</h2>
-        <p>
-          自由不是无边界的冲动，而是在法律框架下每个人都能被平等保护、被公平对待。
-          当规则公开且可追溯，信任才会成长，社会才会稳健前行。
+        <h2 data-i18n="panel1Title">01 · Freedom Needs Rule of Law</h2>
+        <p data-i18n="panel1Body">
+          Freedom is not boundaryless impulse, but equal protection and fair treatment for everyone within a legal
+          framework. When rules are public and traceable, trust can grow and society can move forward steadily.
         </p>
       </section>
 
       <section class="panel">
-        <h2>02 · Rights Grow with Responsibility</h2>
-        <p>
-          公民权利的价值，在于它能够被积极、理性地行使：参与公共讨论、尊重事实、维护他人尊严。
-          责任感让“我的自由”与“我们的未来”不再冲突。
+        <h2 data-i18n="panel2Title">02 · Rights Grow with Responsibility</h2>
+        <p data-i18n="panel2Body">
+          Civic rights matter most when exercised actively and rationally: joining public dialogue, respecting facts,
+          and upholding others' dignity. Responsibility aligns "my freedom" with "our future."
         </p>
       </section>
 
       <section class="panel" id="civic-action">
-        <h2>03 · Participation Shapes the Future</h2>
-        <p>
-          公共生活不是旁观席。每一次投票、每一次社区行动、每一次对透明治理的坚持，
-          都在将抽象的价值转化为现实的制度成果。
+        <h2 data-i18n="panel3Title">03 · Participation Shapes the Future</h2>
+        <p data-i18n="panel3Body">
+          Public life is not a spectator seat. Every vote, every community action, and every insistence on transparent
+          governance turns abstract values into real institutional outcomes.
         </p>
       </section>
     </main>
 
     <footer>
-      <p>Freedom · Responsibility · Participation · Shared Future</p>
+      <p data-i18n="footer">Freedom · Responsibility · Participation · Shared Future</p>
     </footer>
 
     <script type="module" src="./main.js"></script>
