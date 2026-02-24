@@ -55,6 +55,13 @@ footer {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2.6rem;
+  gap: 0.8rem;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
 }
 
 .brand {
@@ -70,6 +77,15 @@ footer {
   border-radius: 99px;
   padding: 0.42rem 0.9rem;
   background: rgba(255, 255, 255, 0.03);
+}
+
+.lang-toggle {
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  padding: 0.42rem 0.9rem;
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
 }
 
 .hero-grid {

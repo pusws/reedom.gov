@@ -1,5 +1,78 @@
 import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
 
+const translations = {
+  en: {
+    brand: 'Civic Atlas',
+    navAction: 'Public Action',
+    eyebrow: 'Inspired by freedom theme',
+    heroTitle: 'Freedom endures when institutions and citizens safeguard it together.',
+    heroSubtitle:
+      'Sustainable liberty belongs not only to personal expression, but also to rule-of-law boundaries, transparency, and civic participation. We are both rights-holders and builders of our shared future.',
+    heroCta: 'Explore Core Principles',
+    valueOrbit: 'Rule of Law · Responsibility · Participation ·',
+    panel1Title: '01 · Freedom Needs Rule of Law',
+    panel1Body:
+      'Freedom is not boundaryless impulse, but equal protection and fair treatment for everyone within a legal framework. When rules are public and traceable, trust can grow and society can move forward steadily.',
+    panel2Title: '02 · Rights Grow with Responsibility',
+    panel2Body:
+      'Civic rights matter most when exercised actively and rationally: joining public dialogue, respecting facts, and upholding others\' dignity. Responsibility aligns "my freedom" with "our future."',
+    panel3Title: '03 · Participation Shapes the Future',
+    panel3Body:
+      'Public life is not a spectator seat. Every vote, every community action, and every insistence on transparent governance turns abstract values into real institutional outcomes.',
+    footer: 'Freedom · Responsibility · Participation · Shared Future',
+    toggleLabel: '中文',
+    toggleAria: 'Switch to Chinese',
+  },
+  zh: {
+    brand: '公民图谱',
+    navAction: '公共行动',
+    eyebrow: '源于自由主题',
+    heroTitle: '自由的意义，\n在制度与公民之间被共同守护。',
+    heroSubtitle:
+      '真正可持续的自由，不只属于个体表达，也来自法治边界、公开透明与社会参与。我们既是权利的拥有者，也是共同体未来的塑造者。',
+    heroCta: '探索核心原则',
+    valueOrbit: '法治 · 责任 · 参与 ·',
+    panel1Title: '01 · 自由需要法治护航',
+    panel1Body: '自由不是无边界的冲动，而是在法律框架下每个人都能被平等保护、被公平对待。当规则公开且可追溯，信任才会成长，社会才会稳健前行。',
+    panel2Title: '02 · 权利与责任共同成长',
+    panel2Body: '公民权利的价值，在于它能够被积极、理性地行使：参与公共讨论、尊重事实、维护他人尊严。责任感让“我的自由”与“我们的未来”不再冲突。',
+    panel3Title: '03 · 参与塑造共同未来',
+    panel3Body: '公共生活不是旁观席。每一次投票、每一次社区行动、每一次对透明治理的坚持，都在将抽象的价值转化为现实的制度成果。',
+    footer: '自由 · 责任 · 参与 · 共同未来',
+    toggleLabel: 'EN',
+    toggleAria: '切换到英文',
+  },
+};
+
+const langToggle = document.querySelector('#lang-toggle');
+let currentLang = 'en';
+
+function applyLanguage(lang) {
+  const pack = translations[lang];
+  if (!pack) return;
+
+  currentLang = lang;
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+
+  document.querySelectorAll('[data-i18n]').forEach((element) => {
+    const key = element.dataset.i18n;
+    if (!pack[key]) return;
+    if (key === 'heroTitle') {
+      element.innerHTML = pack[key].replace('\n', '<br />');
+      return;
+    }
+    element.textContent = pack[key];
+  });
+
+  langToggle.textContent = pack.toggleLabel;
+  langToggle.setAttribute('aria-label', pack.toggleAria);
+}
+
+langToggle.addEventListener('click', () => {
+  applyLanguage(currentLang === 'en' ? 'zh' : 'en');
+});
+
+applyLanguage('en');
 const canvas = document.querySelector('#cosmos');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
