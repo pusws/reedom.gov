@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Civic Atlas · Freedom Compass</title>
+    <meta name="description" content="以自由主题为灵感：自由、法治、公民责任与共同体未来。" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <canvas id="cosmos"></canvas>
+
+    <header class="hero">
+      <nav class="top-nav">
+        <span class="brand">Civic Atlas</span>
+        <a href="#civic-action" class="mini-link">Public Action</a>
+      </nav>
+
+      <div class="hero-grid">
+        <div class="hero-content">
+          <p class="eyebrow">Inspired by freedom theme</p>
+          <h1>自由的意义，<br />在制度与公民之间被共同守护。</h1>
+          <p class="subtitle">
+            真正可持续的自由，不只属于个体表达，也来自法治边界、公开透明与社会参与。
+            我们既是权利的拥有者，也是共同体未来的塑造者。
+          </p>
+          <a href="#principles" class="cta">探索核心原则</a>
+        </div>
+
+        <div class="orbits" aria-hidden="true">
+          <svg viewBox="0 0 560 560" class="glyph" role="img">
+            <defs>
+              <linearGradient id="ringGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#fff6df" />
+                <stop offset="50%" stop-color="#f3cb87" />
+                <stop offset="100%" stop-color="#be7830" />
+              </linearGradient>
+              <linearGradient id="shieldBlue" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#91b3ff" />
+                <stop offset="100%" stop-color="#234797" />
+              </linearGradient>
+              <radialGradient id="coreAura" cx="50%" cy="45%" r="55%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.75" />
+                <stop offset="55%" stop-color="#8fb1ff" stop-opacity="0.38" />
+                <stop offset="100%" stop-color="#8fb1ff" stop-opacity="0" />
+              </radialGradient>
+              <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="4" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+
+            <circle cx="280" cy="280" r="245" class="ring ring-a" />
+            <circle cx="280" cy="280" r="198" class="ring ring-b" />
+            <circle cx="280" cy="280" r="150" class="ring ring-c" />
+
+            <g class="rays">
+              <path d="M280 30v56" />
+              <path d="M280 474v56" />
+              <path d="M30 280h56" />
+              <path d="M474 280h56" />
+              <path d="M105 105l40 40" />
+              <path d="M415 415l40 40" />
+              <path d="M455 105l-40 40" />
+              <path d="M145 415l-40 40" />
+            </g>
+
+            <circle cx="280" cy="280" r="132" fill="url(#coreAura)" />
+
+            <path
+              d="M280 122l130 75v150c0 84-64 151-130 188-66-37-130-104-130-188V197z"
+              class="shield"
+              fill="url(#shieldBlue)"
+            />
+
+            <path
+              d="M280 162l92 53v109c0 57-41 102-92 133-51-31-92-76-92-133V215z"
+              fill="none"
+              stroke="url(#ringGlow)"
+              stroke-width="3.2"
+              filter="url(#softGlow)"
+            />
+
+            <path
+              d="M245 278l24 24 49-50"
+              fill="none"
+              stroke="#ffe9bc"
+              stroke-width="8.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              filter="url(#softGlow)"
+            />
+
+            <circle cx="280" cy="280" r="20" class="core-dot" />
+          </svg>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="panel" id="principles">
+        <h2>01 · Freedom Needs Rule of Law</h2>
+        <p>
+          自由不是无边界的冲动，而是在法律框架下每个人都能被平等保护、被公平对待。
+          当规则公开且可追溯，信任才会成长，社会才会稳健前行。
+        </p>
+      </section>
+
+      <section class="panel">
+        <h2>02 · Rights Grow with Responsibility</h2>
+        <p>
+          公民权利的价值，在于它能够被积极、理性地行使：参与公共讨论、尊重事实、维护他人尊严。
+          责任感让“我的自由”与“我们的未来”不再冲突。
+        </p>
+      </section>
+
+      <section class="panel" id="civic-action">
+        <h2>03 · Participation Shapes the Future</h2>
+        <p>
+          公共生活不是旁观席。每一次投票、每一次社区行动、每一次对透明治理的坚持，
+          都在将抽象的价值转化为现实的制度成果。
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p>Freedom · Responsibility · Participation · Shared Future</p>
+    </footer>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
